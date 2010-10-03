@@ -6,6 +6,10 @@ Paperclip Meta will get image dimensions right after post_process_styles using p
 
 ==Quick Start
 
+Add paperclip to Gemfile:
+
+  gem 'paperclip'
+  
 Create migration:
 
   class AddMetaToAvatar < ActiveRecord::Migration
@@ -38,7 +42,7 @@ Meta column is simple hash:
 
 This hash will be marshaled and base64 encoded before writing to model attribute.
 
-New methods provided:
+Meta methods provided:
   - width
   - height
   - size
