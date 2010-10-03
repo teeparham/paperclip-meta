@@ -6,9 +6,9 @@ Paperclip Meta will get image dimensions right after post_process_styles using p
 
 ==Quick Start
 
-Add paperclip to Gemfile:
+Add paperclip-meta to Gemfile:
 
-  gem 'paperclip'
+  gem 'paperclip-meta'
   
 Create migration:
 
