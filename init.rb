@@ -1,1 +1,1 @@
-require File.join(File.dirname(__FILE__), "lib", "paperclip_meta")
+require File.join(File.dirname(__FILE__), "lib", "paperclip-meta")
