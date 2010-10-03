@@ -1,0 +1,50 @@
+=Paperclip Meta
+
+Simple gem to let paperclip play nice with thumbnails width, height and size.
+
+Paperclip Meta will get image dimensions right after post_process_styles using paperclips own Geometry.from_file. This should make paperclip-meta storage independent.
+
+==Quick Start
+
+Create migration:
+
+  class AddMetaToAvatar < ActiveRecord::Migration
+    def self.up
+      add_column :users, :avatar_meta,    :text
+    end
+
+    def self.down
+      remove_column :users, :avatar_meta
+    end
+  end
+
+Rebuild all thumbnails to fill meta column if you already have some attachments.
+  
+Now you can use meta-magic:
+
+  <%= image_tag @user.avatar.url, :size => @user.avatar.image_size %>
+  <%= image_tag @user.avatar.url(:medium), :size => @user.avatar.image_size(:medium) %>
+  <%= image_tag @user.avatar.url(:thumb), :size => @user.avatar.image_size(:thumb) %>
+
+==Internals
+
+Meta column is simple hash:
+
+  :style => {
+    :width => 100,
+    :height => 100,
+    :size => 42000
+  }
+
+This hash will be marshaled and base64 encoded before writing to model attribute.
+
+New methods provided:
+  - width
+  - height
+  - size
+
+You can pass thumbnail style to all this methods. If style not passed, default_style will be used.
+
+==TODO
+
+* It will be nice to write some tests. :D
