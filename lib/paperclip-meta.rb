@@ -13,15 +13,20 @@ module Paperclip
       meta = {}
 
       @queued_for_write.each do |style, file|
-        meta[style] = {}
+        meta[style] = { :size => File.size(file) }
+        if image?
+          geo = Geometry.from_file file
+          meta[style][:width] = geo.width.to_i
+          meta[style][:height] = geo.height.to_i
+        end
+        
         [:width, :height, :size].each do |meth|
-          if (value = get_meta_from_file(file, meth))
-            meta[style][meth] = value
+          if (meta[style][meth])
             if instance.respond_to?(:"#{name}_#{style}_#{meth}=")
-              instance_write(:"#{style}_#{meth}", value)
+              instance_write(:"#{style}_#{meth}", meta[style][meth])
             end
             if style == default_style && instance.respond_to?(:"#{name}_#{meth}=")
-              instance_write(:"#{meth}", value)
+              instance_write(:"#{meth}", meta[style][meth])
             end
           end
         end
@@ -59,15 +64,6 @@ module Paperclip
     
     def image?
       !content_type.nil? and !!content_type.match(%r{\Aimage/})
-    end
-    
-    def get_meta_from_file(file, method)
-      case method
-        when :size then File.size(file)
-        when :width then image? ? Geometry.from_file(file).width.to_i : nil
-        when :height then image? ? Geometry.from_file(file).height.to_i : nil
-        else nil
-      end
     end
   end
 end
