@@ -1,6 +1,6 @@
 module Paperclip
   class Attachment
-    alias original_post_process_styles post_process_styles
+    alias :original_post_process_styles, :post_process_styles
 
     # If model has #{name}_meta column we getting sizes of processed
     # thumbnails and saving it to #{name}_meta column.
