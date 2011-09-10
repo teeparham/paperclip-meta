@@ -5,7 +5,7 @@ module Paperclip
 
     # If attachment deleted - destroy meta data
     def save
-      unless @queued_for_delete.empty?
+      if (not @queued_for_delete.empty?) and @queued_for_write.empty?
         instance_write(:meta, ActiveSupport::Base64.encode64(Marshal.dump({}))) if instance.respond_to?(:"#{name}_meta=")
       end
       original_save
