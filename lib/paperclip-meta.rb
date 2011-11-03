@@ -20,20 +20,34 @@ module Paperclip
         meta = {}
 
         @queued_for_write.each do |style, file|
-          begin
-            geo = Geometry.from_file file
-            meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => File.size(file) }
-          rescue NotIdentifiedByImageMagickError => e
-            meta[style] = {}
-          end
+          meta[style] = meta_calc_style(style, file)
         end
 
         instance_write(:meta, ActiveSupport::Base64.encode64(Marshal.dump(meta)))
       end
     end
 
+    def meta_calc_style(style, file = nil)
+      meta = {}
+
+      if file == nil
+        file = self.path(style)
+      end
+
+      begin
+        geo = Geometry.from_file file
+        meta = {:width => geo.width.to_i, :height => geo.height.to_i, :size => File.size(file) }
+        meta[:md5] = Digest::MD5.file(file).to_s
+      rescue NotIdentifiedByImageMagickError => e
+        meta = {:image_magick_failure => true}
+        meta[:md5] = Digest::MD5.file(file).to_s
+      end
+        
+      meta
+    end
+
     # Meta access methods
-    [:width, :height, :size].each do |meth|
+    [:width, :height, :size, :md5].each do |meth|
       define_method(meth) do |*args|
         style = args.first || default_style
         meta_read(style, meth)
@@ -48,7 +62,26 @@ module Paperclip
     def meta_read(style, item)
       if instance.respond_to?(:"#{name}_meta") && instance_read(:meta)
         if meta = Marshal.load(ActiveSupport::Base64.decode64(instance_read(:meta)))
-          meta.key?(style) ? meta[style][item] : nil
+          if meta.key?(style)
+            value = meta[style][item]
+            if value != nil
+              value
+            else
+              if !meta[style][:image_magick_failure] || item != :md5
+                meta[style] = meta_calc_style(style)[item]
+                instance_write(:meta, ActiveSupport::Base64.encode64(Marshal.dump(meta)))
+              end
+              meta[style][item]
+            end
+          else
+            if self.styles.include?(style)
+              meta[style] = meta_calc_style(style)[item]
+              instance_write(:meta, ActiveSupport::Base64.encode64(Marshal.dump(meta)))
+              meta[style][item]
+            else
+              nil
+            end
+          end
         end
       end
     end    
