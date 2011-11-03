@@ -4,6 +4,8 @@ Simple gem to let paperclip play nice with thumbnails width, height and size.
 
 Paperclip Meta will get image dimensions right after post_process_styles using paperclips own Geometry.from_file. This should make paperclip-meta storage independent.
 
+If you add paperclip meta to your project later, as meta methods are accessed on each style, the values will be calculated.
+
 ==Quick Start
 
 Add paperclip-meta to Gemfile:
@@ -37,6 +39,7 @@ Meta column is simple hash:
   :style => {
     :width => 100,
     :height => 100,
+    :md5 => "715bdfbb922ee005b960179479592d09", 
     :size => 42000
   }
 
@@ -46,6 +49,7 @@ Meta methods provided:
   - width
   - height
   - size
+  - md5
 
 You can pass thumbnail style to all this methods. If style not passed, default_style will be used.
 
