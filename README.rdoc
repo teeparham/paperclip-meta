@@ -43,11 +43,11 @@ Meta column is simple hash:
 This hash will be marshaled and base64 encoded before writing to model attribute.
 
 Meta methods provided:
-  - width
-  - height
-  - size
+  - width `@user.avatar.width(:thumb)`
+  - height `@user.avatar.height(:medium)`
+  - size `@user.avatar.size`
 
-You can pass thumbnail style to all this methods. If style not passed, default_style will be used.
+You can pass thumbnail style to all these methods. If style not passed, default_style will be used.
 
 ==TODO
 
