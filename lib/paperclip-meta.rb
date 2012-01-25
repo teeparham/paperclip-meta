@@ -14,7 +14,7 @@ module Paperclip
     # If model has #{name}_meta column we getting sizes of processed
     # thumbnails and saving it to #{name}_meta column.
     def post_process_styles(*style_args)
-      original_post_process_styles(style_args)
+      method(:original_post_process_styles).arity == 0 ? original_post_process_styles : original_post_process_styles(*style_args)
 
       if instance.respond_to?(:"#{name}_meta=")
         meta = {}
