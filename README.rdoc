@@ -9,7 +9,7 @@ Paperclip Meta will get image dimensions right after post_process_styles using p
 Add paperclip-meta to Gemfile:
 
   gem 'paperclip-meta'
-  
+
 Create migration:
 
   class AddMetaToAvatar < ActiveRecord::Migration
@@ -23,7 +23,7 @@ Create migration:
   end
 
 Rebuild all thumbnails to fill meta column if you already have some attachments.
-  
+
 Now you can use meta-magic:
 
   <%= image_tag @user.avatar.url, :size => @user.avatar.image_size %>

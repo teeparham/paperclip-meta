@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    paperclip-meta (0.3)
+    paperclip-meta (0.3.1)
       paperclip
 
 GEM
@@ -47,7 +47,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (>= 3)
+  activerecord
+  bundler (>= 1.0.0)
   paperclip
   paperclip-meta!
   rspec

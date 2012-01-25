@@ -1,26 +1,20 @@
-$LOAD_PATH << "." unless $LOAD_PATH.include?(".")
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default, :development)
 
-begin
-  require "bundler"
-  Bundler.setup
-rescue Bundler::GemNotFound
-  raise RuntimeError, "Bundler couldn't find some gems." +
-    "Did you run `bundle install`?"
-end
+# Prepare activerecord
+require "active_record"
 
-Bundler.require
-require 'logger'
-Paperclip::Railtie.insert
-
+# Connect to sqlite
 ActiveRecord::Base.establish_connection(
-  "adapter" => "sqlite3", 
+  "adapter" => "sqlite3",
   "database" => ":memory:"
 )
 
 ActiveRecord::Base.logger = Logger.new(nil)
+load(File.join(File.dirname(__FILE__), 'schema.rb'))
 
-load(File.dirname(__FILE__) + '/schema.rb')
-$: << File.join(File.dirname(__FILE__), '..', 'lib')
+Paperclip::Railtie.insert
 
 class Image < ActiveRecord::Base
   has_attached_file :small_image,

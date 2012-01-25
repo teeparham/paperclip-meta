@@ -1,4 +1,12 @@
+require "paperclip"
+require "paperclip-meta/version"
+
 module Paperclip
+  module Meta
+    # TODO: Move most of paperclip-meta crap here.
+  end
+
+  # TODO: Make paperclip-meta less monkey-style.
   class Attachment
     alias :original_post_process_styles :post_process_styles
     alias :original_save :save
