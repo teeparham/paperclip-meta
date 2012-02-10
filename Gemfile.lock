@@ -30,6 +30,7 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
+    rake (0.8.7)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -51,5 +52,6 @@ DEPENDENCIES
   bundler (>= 1.0.0)
   paperclip
   paperclip-meta!
+  rake
   rspec
   sqlite3-ruby
