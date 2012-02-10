@@ -1,4 +1,5 @@
-=Paperclip Meta
+=Paperclip Meta {<img src="https://secure.travis-ci.org/y8/paperclip-meta.png" />}[http://travis-ci.org/y8/paperclip-meta]
+
 
 Simple gem to let paperclip play nice with thumbnails width, height and size.
 
