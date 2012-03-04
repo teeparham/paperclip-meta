@@ -6,6 +6,7 @@ module Paperclip
         base.send :include, InstanceMethods
         base.alias_method_chain :save, :meta_data
         base.alias_method_chain :post_process_styles, :meta_data
+        base.alias_method_chain :size, :meta_data
       end
 
       module InstanceMethods
@@ -38,8 +39,13 @@ module Paperclip
           end
         end
 
+        #Use meta info for style if required
+        def size_with_meta_data(passed_style = nil)
+          passed_style ? meta_read(passed_style, :size) : size_without_meta_data
+        end
+
         # Define meta accessors methods
-        [:width, :height, :size].each do |meth|
+        [:width, :height ].each do |meth|
           define_method(meth) do |*args|
             style = args.first || default_style
             meta_read(style, meth)

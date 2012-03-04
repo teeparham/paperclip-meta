@@ -33,6 +33,28 @@ describe "Geometry saver plugin" do
     img.big_image.height(:small).should == 100
   end
 
+  describe 'file size' do
+    before do
+      @image = Image.new
+      @image.big_image = @big_image
+      @image.save!
+    end
+
+    it 'should save file size with meta data ' do
+      @image.big_image.size(:small).should == 3485
+    end
+
+    it 'should access normal paperclip method when no style passed' do
+      @image.big_image.should_receive(:size_without_meta_data).once.and_return(1234)
+      @image.big_image.size.should == 1234
+    end
+
+    it 'should have access to original file size' do
+      @image.big_image.size.should == 37042
+    end
+
+  end
+
   it "clears geometry fields when image is destroyed" do
     img = Image.new
     img.small_image = @small_image
@@ -53,4 +75,5 @@ describe "Geometry saver plugin" do
     lambda { img.save! }.should_not raise_error
     img.small_image.width(:small).should be_nil
   end
+
 end
