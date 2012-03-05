@@ -1,6 +1,13 @@
 module Paperclip
   module Meta
     module Attachment
+      # Use Base64 class if aviliable, to prevent
+      # ActiveSupport deprecation warnings.
+      begin
+        require "base64"
+      rescue LoadError
+        Base64 = ActiveSupport::Base64
+      end
 
       def self.included(base)
         base.send :include, InstanceMethods
@@ -71,29 +78,14 @@ module Paperclip
 
         # Return encoded metadata as String
         def meta_encode(meta)
-          # Use Base64 class if aviliable, to prevent
-          # ActiveSupport deprecation warnings.
-          if Module.const_defined? "Base64"
-            ::Base64.encode64(Marshal.dump(meta))
-          else
-           ActiveSupport::Base64.encode64(Marshal.dump(meta))
-          end
+          Base64.encode64(Marshal.dump(meta))
         end
 
         # Return decoded metadata as Object
         def meta_decode(meta)
-          # Use Base64 class if aviliable, to prevent
-          # ActiveSupport deprecation warnings.
-          if Module.const_defined? "Base64"
-            Marshal.load(::Base64.decode64(meta))
-          else
-            Marshal.load(ActiveSupport::Base64.decode64(meta))
-          end
+          Marshal.load(Base64.decode64(meta))
         end
-
       end
-
     end
-
   end
 end
