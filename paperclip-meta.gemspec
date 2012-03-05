@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "paperclip"
   s.add_development_dependency "rspec"
   s.add_development_dependency "activerecord"
+  s.add_development_dependency "activerecord-jdbcsqlite3-adapter" if RUBY_PLATFORM == 'java'
   s.add_development_dependency "sqlite3-ruby"
 
   # Runtime dependencies
