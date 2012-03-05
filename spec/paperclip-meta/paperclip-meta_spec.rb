@@ -41,7 +41,7 @@ describe "Geometry saver plugin" do
     end
 
     it 'should save file size with meta data ' do
-      @image.big_image.size(:small).should == 3485
+      @image.big_image.size(:small).should == 3526
     end
 
     it 'should access normal paperclip method when no style passed' do
