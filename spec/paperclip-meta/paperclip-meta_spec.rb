@@ -41,7 +41,9 @@ describe "Geometry saver plugin" do
     end
 
     it 'should save file size with meta data ' do
-      @image.big_image.size(:small).should == 3526
+      path = File.join(File.dirname(__FILE__), "../tmp/fixtures/tmp/small/#{@image.id}.jpg")
+      size = File.stat(path).size
+      @image.big_image.size(:small).should == size
     end
 
     it 'should access normal paperclip method when no style passed' do
