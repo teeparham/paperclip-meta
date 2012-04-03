@@ -33,7 +33,7 @@ module Paperclip
             @queued_for_write.each do |style, file|
               begin
                 geo = Geometry.from_file file
-                meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => File.size(file) }
+                meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => file.size }
               rescue NotIdentifiedByImageMagickError => e
                 meta[style] = {}
               end
