@@ -14,7 +14,7 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Base.logger = Logger.new(nil)
 load(File.join(File.dirname(__FILE__), 'schema.rb'))
 
-Paperclip::Railtie.insert
+ActiveRecord::Base.send(:include, Paperclip::Glue)
 Paperclip::Meta::Railtie.insert
 
 class Image < ActiveRecord::Base
