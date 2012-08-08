@@ -12,7 +12,7 @@ GIT
 PATH
   remote: .
   specs:
-    paperclip-meta (0.4.1)
+    paperclip-meta (0.4.3)
       paperclip
 
 GEM
