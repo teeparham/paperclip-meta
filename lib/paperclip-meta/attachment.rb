@@ -41,7 +41,7 @@ module Paperclip
 
             unless meta == {}
               instance.send("#{name}_meta=", meta_encode(meta))
-              instance.class.update_all({ "#{name}_meta" => meta_encode(meta) }, instance.class.primary_key => instance.id)
+              instance.class.where(instance.class.primary_key => instance.id).update_all({ "#{name}_meta" => meta_encode(meta) })
             end
           end
         end
