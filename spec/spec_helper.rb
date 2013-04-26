@@ -27,5 +27,5 @@ class Image < ActiveRecord::Base
     :storage => :filesystem,
     :path => "./spec/tmp/fixtures/tmp/:style/:id.:extension",
     :url => "./spec/tmp/fixtures/tmp/:style/:id.extension",
-    :styles => { :small => "100x100#" }
+    :styles => { :small => "100x100#", :big => "500x500#" }
 end

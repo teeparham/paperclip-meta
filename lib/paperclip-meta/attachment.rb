@@ -39,11 +39,30 @@ module Paperclip
               end
             end
 
+            # retrieves the original metadata for that name
+            original_meta = instance.send("#{name}_meta")
+            decoded_original_meta = meta_decode(original_meta) if original_meta
+
+            # if original meta exists replace old metadata with new metadata
+            # retains metadata relating to other styles that may not be processed on exclusive reprocess
+            if decoded_original_meta
+              all_styles.each do |style|
+                # if a metadata for that style already exists
+                unless meta[style].present?
+                  meta[style] = decoded_original_meta[style]
+                end
+              end
+            end
+
             unless meta == {}
               instance.send("#{name}_meta=", meta_encode(meta))
               instance.class.where(instance.class.primary_key => instance.id).update_all({ "#{name}_meta" => meta_encode(meta) })
             end
           end
+        end
+
+        def all_styles
+          self.styles.keys.prepend(:original)
         end
 
         #Use meta info for style if required

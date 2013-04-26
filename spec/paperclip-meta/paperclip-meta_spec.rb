@@ -33,6 +33,25 @@ describe "Geometry saver plugin" do
     img.big_image.height(:small).should == 100
   end
 
+  it "doesn't overwrite all metadata if using reprocess wih specific controllers" do
+    img = Image.new
+    img.small_image = @small_image
+    img.big_image = @big_image
+    img.save!
+
+    img.big_image.width(:small).should == 100
+    img.big_image.height(:small).should == 100
+    img.big_image.width(:big).should == 500
+    img.big_image.height(:big).should == 500
+
+    img.big_image.reprocess!(:small)
+
+    img.big_image.width(:small).should == 100
+    img.big_image.height(:small).should == 100
+    img.big_image.width(:big).should == 500
+    img.big_image.height(:big).should == 500
+  end
+
   describe 'file size' do
     before do
       @image = Image.new
