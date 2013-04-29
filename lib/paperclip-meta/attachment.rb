@@ -29,21 +29,23 @@ module Paperclip
           post_process_styles_without_meta_data(*style_args)
 
           if instance.respond_to?(:"#{name}_meta=")
-            populate_meta(@queued_for_write)
-            write_meta(@meta)
+            meta = populate_meta(@queued_for_write)
+            write_meta(meta)
           end
         end
 
         def populate_meta(queue)
-          @meta = {}
+          meta = {}
           queue.each do |style, file|
             begin
               geo = Geometry.from_file file
-              @meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => file.size }
+              meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => file.size }
             rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
-              @meta[style] = {}
+              meta[style] = {}
             end
           end
+
+          meta
         end
 
         def retain_meta(meta)
