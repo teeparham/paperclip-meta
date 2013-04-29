@@ -29,21 +29,53 @@ module Paperclip
           post_process_styles_without_meta_data(*style_args)
 
           if instance.respond_to?(:"#{name}_meta=")
-            meta = {}
-            @queued_for_write.each do |style, file|
-              begin
-                geo = Geometry.from_file file
-                meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => file.size }
-              rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
-                meta[style] = {}
-              end
-            end
+            meta = populate_meta(@queued_for_write)
+            write_meta(meta)
+          end
+        end
 
-            unless meta == {}
-              instance.send("#{name}_meta=", meta_encode(meta))
-              instance.class.where(instance.class.primary_key => instance.id).update_all({ "#{name}_meta" => meta_encode(meta) })
+        def populate_meta(queue)
+          meta = {}
+          queue.each do |style, file|
+            begin
+              geo = Geometry.from_file file
+              meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => file.size }
+            rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
+              meta[style] = {}
             end
           end
+
+          meta
+        end
+
+        def retain_meta(meta)
+          # retrieves the original metadata for that name
+          original_meta = instance.send("#{name}_meta")
+          decoded_original_meta = meta_decode(original_meta) if original_meta
+
+          # if original meta exists replace old metadata with new metadata
+          # retains metadata relating to other styles that may not be processed on exclusive reprocess
+          if decoded_original_meta
+            all_styles.each do |style|
+              # if a metadata for that style already exists
+              unless meta[style].present?
+                meta[style] = decoded_original_meta[style]
+              end
+            end
+          end
+        end
+
+        def write_meta(meta)
+          retain_meta(meta)
+
+          unless meta == {}
+            instance.send("#{name}_meta=", meta_encode(meta))
+            instance.class.where(instance.class.primary_key => instance.id).update_all({ "#{name}_meta" => meta_encode(meta) })
+          end
+        end
+
+        def all_styles
+          self.styles.keys.prepend(:original)
         end
 
         #Use meta info for style if required
