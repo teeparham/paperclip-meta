@@ -34,7 +34,7 @@ module Paperclip
               begin
                 geo = Geometry.from_file file
                 meta[style] = {:width => geo.width.to_i, :height => geo.height.to_i, :size => file.size }
-              rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
+              rescue (Paperclip::VERSION < "3.0.0" ? Paperclip::NotIdentifiedByImageMagickError : Paperclip::Errors::NotIdentifiedByImageMagickError) => e
                 meta[style] = {}
               end
             end
