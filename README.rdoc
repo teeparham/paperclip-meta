@@ -1,4 +1,6 @@
-= Paperclip Meta {<img src="https://secure.travis-ci.org/y8/paperclip-meta.png" />}[http://travis-ci.org/y8/paperclip-meta]
+= Paperclip Meta 
+
+{<img src="https://secure.travis-ci.org/teeparham/paperclip-meta.png" />}[http://travis-ci.org/teeparham/paperclip-meta]
 
 Add width, height, and size to paperclip images.
 
