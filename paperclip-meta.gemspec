@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Paperclip::Meta::VERSION
   s.authors     = ["Alexey Bondar", "Tee Parham"]
   s.email       = ["y8@ya.ru", "tee@neighborland.com"]
-  s.homepage    = "http://github.com/y8/paperclip-meta"
+  s.homepage    = "http://github.com/teeparham/paperclip-meta"
   s.summary     = %q{Add width, height, and size to paperclip images}
   s.description = %q{Add width, height and size methods to paperclip images}
 
