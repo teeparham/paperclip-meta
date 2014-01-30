@@ -1,22 +1,21 @@
-=Paperclip Meta {<img src="https://secure.travis-ci.org/y8/paperclip-meta.png" />}[http://travis-ci.org/y8/paperclip-meta]
+= Paperclip Meta {<img src="https://secure.travis-ci.org/y8/paperclip-meta.png" />}[http://travis-ci.org/y8/paperclip-meta]
 
-== This gem needs new maintainer[https://github.com/y8/paperclip-meta/issues/26]! 
+Add width, height, and size to paperclip images.
 
-Simple gem to let paperclip play nice with thumbnails width, height and size.
+Paperclip Meta gets image dimensions right after post_process_styles using paperclips own Geometry.from_file. 
+This should make paperclip-meta storage independent.
 
-Paperclip Meta will get image dimensions right after post_process_styles using paperclips own Geometry.from_file. This should make paperclip-meta storage independent.
-
-==Quick Start
+== Quick Start
 
 Add paperclip-meta to Gemfile:
 
   gem 'paperclip-meta'
 
-Create migration:
+Create migration to add a *_meta column:
 
   class AddMetaToAvatar < ActiveRecord::Migration
     def self.up
-      add_column :users, :avatar_meta,    :text
+      add_column :users, :avatar_meta, :text
     end
 
     def self.down
@@ -34,7 +33,7 @@ Now you can use meta-magic:
 
 ==Internals
 
-Meta column is simple hash:
+The meta column is simple hash:
 
   :style => {
     :width => 100,
@@ -49,8 +48,4 @@ Meta methods provided:
   - height `@user.avatar.height(:medium)`
   - size `@user.avatar.size`
 
-You can pass thumbnail style to all these methods. If style not passed, default_style will be used.
-
-==TODO
-
-* It will be nice to write some tests. :D
+You can pass the image style to these methods. If a style is not passed, default_style will be used.
