@@ -9,7 +9,6 @@ module Paperclip
       end
 
       module InstanceMethods
-
         def save_with_meta_data
           if @queued_for_delete.any? && @queued_for_write.empty? && instance.respond_to?(:"#{name}_meta=")
             instance_write(:meta, meta_encode({}))
@@ -39,28 +38,28 @@ module Paperclip
             .update_all("#{name}_meta" => meta_encode(meta))
         end
 
-        #Use meta info for style if required
+        # Use meta info for style if required
         def size_with_meta_data(passed_style = nil)
           passed_style ? meta_read(passed_style, :size) : size_without_meta_data
         end
 
-        # Define meta accessors methods
-        [:width, :height ].each do |meth|
-          define_method(meth) do |*args|
-            style = args.first || default_style
-            meta_read(style, meth)
-          end
+        def height(*args)
+          meta_read((args.first || default_style), :height)
         end
 
-        # Returns image dimesions ("WxH") for given style name. If style name not given,
-        # returns dimesions for default_style.
+        def width(*args)
+          meta_read((args.first || default_style), :width)
+        end
+
+        # Return image dimesions ("WxH") for given style name. If style name not given,
+        # return dimesions for default_style.
         def image_size(style = default_style)
           "#{width(style)}x#{height(style)}"
         end
 
         private
 
-        # Returns meta data for given style
+        # Return meta data for given style
         def meta_read(style, item)
           if instance.respond_to?(:"#{name}_meta") && instance_read(:meta)
             if (meta = meta_decode(instance_read(:meta)))
