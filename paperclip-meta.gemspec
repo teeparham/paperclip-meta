@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   # Development depensencies
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "rake"
-  s.add_development_dependency "paperclip"
   s.add_development_dependency "rspec"
   s.add_development_dependency "activerecord"
   s.add_development_dependency "activerecord-jdbcsqlite3-adapter" if RUBY_PLATFORM == 'java'
