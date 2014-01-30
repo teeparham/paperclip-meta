@@ -1,14 +1,6 @@
 module Paperclip
   module Meta
     module Attachment
-      # Use Base64 class if aviliable, to prevent
-      # ActiveSupport deprecation warnings.
-      begin
-        require "base64"
-      rescue LoadError
-        Base64 = ActiveSupport::Base64
-      end
-
       def self.included(base)
         base.send :include, InstanceMethods
         base.alias_method_chain :save, :meta_data
