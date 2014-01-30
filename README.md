@@ -1,47 +1,56 @@
-= Paperclip Meta 
+# Paperclip Meta 
 
-{<img src="https://secure.travis-ci.org/teeparham/paperclip-meta.png" />}[http://travis-ci.org/teeparham/paperclip-meta]
+[![Gem Version](https://badge.fury.io/rb/paperclip-meta.png)](http://badge.fury.io/rb/paperclip-meta)
+[![Build Status](https://travis-ci.org/teeparham/paperclip-meta.png)](https://travis-ci.org/teeparham/paperclip-meta)
 
 Add width, height, and size to paperclip images.
 
 Paperclip Meta gets image dimensions after post_process_styles using paperclips own Geometry.from_file.
 This should make paperclip-meta storage independent.
 
-== Quick Start
+### Setup
 
 Add paperclip-meta to Gemfile:
 
-  gem 'paperclip-meta'
+```ruby
+gem 'paperclip-meta'
+```
 
 Create migration to add a *_meta column:
 
-  class AddMetaToAvatar < ActiveRecord::Migration
-    def self.up
-      add_column :users, :avatar_meta, :text
-    end
-
-    def self.down
-      remove_column :users, :avatar_meta
-    end
+```ruby
+class AddMetaToAvatar < ActiveRecord::Migration
+  def self.up
+    add_column :users, :avatar_meta, :text
   end
+
+  def self.down
+    remove_column :users, :avatar_meta
+  end
+end
+```
 
 Rebuild all thumbnails to fill meta column if you already have some attachments.
 
 Now you can use meta-magic:
 
+```
   <%= image_tag @user.avatar.url, :size => @user.avatar.image_size %>
   <%= image_tag @user.avatar.url(:medium), :size => @user.avatar.image_size(:medium) %>
   <%= image_tag @user.avatar.url(:thumb), :size => @user.avatar.image_size(:thumb) %>
+```
 
-==Internals
+### Internals
 
 The meta column is simple hash:
 
-  :style => {
-    :width => 100,
-    :height => 100,
-    :size => 42000
-  }
+```ruby
+:style => {
+  :width => 100,
+  :height => 100,
+  :size => 42000
+}
+```
 
 This hash will be marshaled and base64 encoded before writing to model attribute.
 
