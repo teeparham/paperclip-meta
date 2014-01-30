@@ -18,13 +18,14 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # Development depensencies
+  s.required_ruby_version = ">= 1.9.3"
+
+  s.add_dependency "paperclip", "~> 3.0"
+
   s.add_development_dependency "bundler", "~> 1.5"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
   s.add_development_dependency "activerecord", "~> 4.0"
   s.add_development_dependency "sqlite3-ruby"
 
-  # Runtime dependencies
-  s.add_dependency "paperclip", "~> 3.0"
 end
