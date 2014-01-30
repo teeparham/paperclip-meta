@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gem "activerecord-jdbcsqlite3-adapter", :platform => "jruby"
 
