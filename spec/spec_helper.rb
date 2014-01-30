@@ -1,17 +1,14 @@
-require 'rubygems'
 require 'bundler/setup'
-Bundler.require(:default, :development)
-
-# Prepare activerecord
+Bundler.require(:default)
 require "active_record"
 
-# Connect to sqlite
 ActiveRecord::Base.establish_connection(
-  "adapter" => "sqlite3",
-  "database" => ":memory:"
+  adapter: "sqlite3",
+  database: ":memory:"
 )
 
-ActiveRecord::Base.logger = Logger.new(nil)
+ActiveRecord::Base.logger = Logger.new(STDERR) if ENV["VERBOSE"]
+
 load(File.join(File.dirname(__FILE__), 'schema.rb'))
 
 ActiveRecord::Base.send(:include, Paperclip::Glue)

@@ -1,5 +1,5 @@
-ActiveRecord::Schema.define :version => 0 do
-  create_table "images", :force => true do |t|
+ActiveRecord::Schema.define do
+  create_table :images do |t|
     t.string  :small_image_file_name
     t.string  :small_image_content_type
     t.integer :small_image_updated_at
