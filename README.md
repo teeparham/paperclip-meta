@@ -5,8 +5,7 @@
 
 Add width, height, and size to paperclip images.
 
-Paperclip Meta gets image dimensions after post_process_styles using paperclips own Geometry.from_file.
-This should make paperclip-meta storage independent.
+Paperclip Meta gets image dimensions after `post_process_styles` using paperclip's `Geometry.from_file`.
 
 ### Setup
 
@@ -19,25 +18,21 @@ gem 'paperclip-meta'
 Create migration to add a *_meta column:
 
 ```ruby
-class AddMetaToAvatar < ActiveRecord::Migration
-  def self.up
+class AddAvatarMetaToUsers < ActiveRecord::Migration
+  def change
     add_column :users, :avatar_meta, :text
-  end
-
-  def self.down
-    remove_column :users, :avatar_meta
   end
 end
 ```
 
-Rebuild all thumbnails to fill meta column if you already have some attachments.
+Rebuild all thumbnails to populate the meta column if you already have some attachments.
 
-Now you can use meta-magic:
+Now you can grab the size from the paperclip attachment:
 
 ```
-  <%= image_tag @user.avatar.url, :size => @user.avatar.image_size %>
-  <%= image_tag @user.avatar.url(:medium), :size => @user.avatar.image_size(:medium) %>
-  <%= image_tag @user.avatar.url(:thumb), :size => @user.avatar.image_size(:thumb) %>
+<%= image_tag user.avatar.url, size: user.avatar.image_size %>
+<%= image_tag user.avatar.url(:medium), size: user.avatar.image_size(:medium) %>
+<%= image_tag user.avatar.url(:thumb), size: user.avatar.image_size(:thumb) %>
 ```
 
 ### Internals
@@ -45,18 +40,28 @@ Now you can use meta-magic:
 The meta column is simple hash:
 
 ```ruby
-:style => {
-  :width => 100,
-  :height => 100,
-  :size => 42000
+style: {
+  width:  100,
+  height: 100,
+  size:   42000
 }
 ```
 
 This hash will be marshaled and base64 encoded before writing to model attribute.
 
-Meta methods provided:
-  - width `@user.avatar.width(:thumb)`
-  - height `@user.avatar.height(:medium)`
-  - size `@user.avatar.size`
+`height`, `width`, and `size` methods are provided:
 
-You can pass the image style to these methods. If a style is not passed, default_style will be used.
+```ruby
+user.avatar.width(:thumb)
+=> 100
+user.avatar.height(:medium)
+=> 200
+user.avatar.size
+=> '60x70'
+```
+
+You can pass the image style to these methods. If a style is not passed, the default style will be used.
+
+### Alternatives
+
+https://github.com/thoughtbot/paperclip/wiki/Extracting-image-dimensions
