@@ -4,7 +4,7 @@
 
 Add width, height, and size to paperclip images.
 
-Paperclip Meta gets image dimensions right after post_process_styles using paperclips own Geometry.from_file. 
+Paperclip Meta gets image dimensions after post_process_styles using paperclips own Geometry.from_file.
 This should make paperclip-meta storage independent.
 
 == Quick Start

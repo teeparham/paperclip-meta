@@ -5,11 +5,11 @@ require "paperclip-meta/version"
 Gem::Specification.new do |s|
   s.name        = "paperclip-meta"
   s.version     = Paperclip::Meta::VERSION
-  s.authors     = ["Alexey Bondar"]
-  s.email       = ["y8@ya.ru"]
+  s.authors     = ["Alexey Bondar", "Tee Parham"]
+  s.email       = ["y8@ya.ru", "tee@neighborland.com"]
   s.homepage    = "http://github.com/y8/paperclip-meta"
-  s.summary     = %q{Thumbnail dimensions for paperclip}
-  s.description = %q{Add width, height and size methods to paperclip thumbnails}
+  s.summary     = %q{Add width, height, and size to paperclip images}
+  s.description = %q{Add width, height and size methods to paperclip images}
 
   s.rubyforge_project = "paperclip-meta"
 
@@ -19,13 +19,12 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # Development depensencies
-  s.add_development_dependency "bundler", ">= 1.0.0"
+  s.add_development_dependency "bundler", "~> 1.5"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
-  s.add_development_dependency "activerecord"
-  s.add_development_dependency "activerecord-jdbcsqlite3-adapter" if RUBY_PLATFORM == 'java'
+  s.add_development_dependency "activerecord", "~> 4.0"
   s.add_development_dependency "sqlite3-ruby"
 
   # Runtime dependencies
-  s.add_runtime_dependency "paperclip"
+  s.add_dependency "paperclip", "~> 3.0"
 end
