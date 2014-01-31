@@ -33,9 +33,6 @@ module Paperclip
           return if meta == {}
 
           instance.send("#{name}_meta=", meta_encode(meta))
-          instance.class
-            .where(instance.class.primary_key => instance.id)
-            .update_all("#{name}_meta" => meta_encode(meta))
         end
 
         # Use meta info for style if required
