@@ -36,8 +36,8 @@ module Paperclip
         end
 
         # Use meta info for style if required
-        def size_with_meta_data(passed_style = nil)
-          passed_style ? meta_read(passed_style, :size) : size_without_meta_data
+        def size_with_meta_data(style = nil)
+          style ? meta_read(style, :size) : size_without_meta_data
         end
 
         def height(style = default_style)
