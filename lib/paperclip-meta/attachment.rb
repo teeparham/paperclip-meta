@@ -10,7 +10,7 @@ module Paperclip
 
       module InstanceMethods
         def save_with_meta_data
-          if @queued_for_delete.any? && @queued_for_write.empty? && instance.respond_to?(:"#{name}_meta=")
+          if @queued_for_delete.any? && @queued_for_write.empty?
             instance_write(:meta, meta_encode({}))
           end
           save_without_meta_data
