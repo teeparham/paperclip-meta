@@ -43,12 +43,12 @@ module Paperclip
           passed_style ? meta_read(passed_style, :size) : size_without_meta_data
         end
 
-        def height(*args)
-          meta_read((args.first || default_style), :height)
+        def height(style = default_style)
+          meta_read style, :height
         end
 
-        def width(*args)
-          meta_read((args.first || default_style), :width)
+        def width(style = default_style)
+          meta_read style, :width
         end
 
         # Return image dimesions ("WxH") for given style name. If style name not given,
