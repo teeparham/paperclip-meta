@@ -7,7 +7,11 @@ ActiveRecord::Base.establish_connection(
   database: ":memory:"
 )
 
-ActiveRecord::Base.logger = Logger.new(STDERR) if ENV["VERBOSE"]
+if ENV["VERBOSE"]
+  ActiveRecord::Base.logger = Logger.new(STDERR)
+else
+  Paperclip.options[:log] = false
+end
 
 load(File.join(File.dirname(__FILE__), 'schema.rb'))
 
