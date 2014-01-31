@@ -30,7 +30,7 @@ describe "Attachment" do
     end
 
     it 'should save file size with meta data ' do
-      path = File.join(File.dirname(__FILE__), "../tmp/fixtures/tmp/small/#{@image.id}.jpg")
+      path = File.join(File.dirname(__FILE__), "../tmp/fixtures/tmp/thumb/#{@image.id}.jpg")
       size = File.stat(path).size
       @image.big_image.size(:thumb).should == size
     end
