@@ -65,3 +65,26 @@ You can pass the image style to these methods. If a style is not passed, the def
 ### Alternatives
 
 https://github.com/thoughtbot/paperclip/wiki/Extracting-image-dimensions
+
+### Development
+
+Test:
+
+```sh
+bundle
+rake
+```
+
+Test paperclip 3.x:
+
+```sh
+BUNDLE_GEMFILE=./spec/gemfiles/Gemfile.paperclip-3 bundle
+BUNDLE_GEMFILE=./spec/gemfiles/Gemfile.paperclip-3 rake
+```
+
+Test paperclip 4.x:
+
+```sh
+BUNDLE_GEMFILE=./spec/gemfiles/Gemfile.paperclip-4 bundle
+BUNDLE_GEMFILE=./spec/gemfiles/Gemfile.paperclip-4 rake
+```
