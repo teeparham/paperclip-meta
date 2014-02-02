@@ -48,18 +48,24 @@ describe "Attachment" do
   it "clears geometry fields when image is destroyed" do
     img = Image.create(small_image: small_image, big_image: big_image)
     assert_equal 100, img.big_image.width(:thumb)
-
     img.big_image = nil
     img.save!
-
     assert_nil img.big_image.width(:thumb)
   end
 
-  it "does not fails when file is not an image" do
+  it "does not save when file is not an image" do
     img = Image.new
     img.small_image = not_image
+    refute img.save
+    assert_nil img.small_image.width
+  end
+
+  it "returns nil attributes when file is not an image" do
+    img = ImageWithNoValidation.new
+    img.small_image = not_image
     img.save!
-    assert_nil img.small_image.width(:thumb)
+    assert_nil img.small_image.width
+    assert_nil img.small_image.height
   end
 
   private

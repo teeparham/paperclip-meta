@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = ">= 1.9.3"
 
-  s.add_dependency "paperclip", "~> 3.0"
+  s.add_dependency "paperclip", ">= 3.0.2", "< 5.0"
 
   s.add_development_dependency "bundler", "~> 1.5"
   s.add_development_dependency "rake", "~> 10.1"
