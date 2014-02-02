@@ -1,6 +1,8 @@
 require 'bundler/setup'
 Bundler.require(:default)
-require "active_record"
+require 'active_record'
+require 'minitest/autorun'
+require 'mocha/setup'
 
 ActiveRecord::Base.establish_connection(
   adapter: "sqlite3",

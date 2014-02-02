@@ -5,14 +5,14 @@ describe "Attachment" do
     img = Image.create(small_image: small_image)
     img.reload
     geometry = geometry_for(small_path)
-    img.small_image.width.should == geometry.width
-    img.small_image.height.should == geometry.height
+    assert_equal geometry.width, img.small_image.width
+    assert_equal geometry.height, img.small_image.height
   end
 
   it "saves geometry for styles" do
     img = Image.create(small_image: small_image, big_image: big_image)
-    img.big_image.width(:thumb).should == 100
-    img.big_image.height(:thumb).should == 100
+    assert_equal 100, img.big_image.width(:thumb)
+    assert_equal 100, img.big_image.height(:thumb)
   end
 
   it "sets geometry on update" do
@@ -20,8 +20,8 @@ describe "Attachment" do
     img.small_image = small_image
     img.save
     geometry = geometry_for(small_path)
-    img.small_image.width.should == geometry.width
-    img.small_image.height.should == geometry.height
+    assert_equal geometry.width, img.small_image.width
+    assert_equal geometry.height, img.small_image.height
   end
 
   describe 'file size' do
@@ -32,34 +32,34 @@ describe "Attachment" do
     it 'should save file size with meta data ' do
       path = File.join(File.dirname(__FILE__), "tmp/fixtures/tmp/thumb/#{@image.id}.jpg")
       size = File.stat(path).size
-      @image.big_image.size(:thumb).should == size
+      assert_equal size, @image.big_image.size(:thumb)
     end
 
     it 'should access normal paperclip method when no style passed' do
-      @image.big_image.should_receive(:size_without_meta_data).once.and_return(1234)
-      @image.big_image.size.should == 1234
+      @image.big_image.expects size_without_meta_data: 1234
+      assert_equal 1234, @image.big_image.size
     end
 
     it 'should have access to original file size' do
-      @image.big_image.size.should == 37042
+      assert_equal 37042, @image.big_image.size
     end
   end
 
   it "clears geometry fields when image is destroyed" do
     img = Image.create(small_image: small_image, big_image: big_image)
-    img.big_image.width(:thumb).should == 100
+    assert_equal 100, img.big_image.width(:thumb)
 
     img.big_image = nil
     img.save!
 
-    img.big_image.width(:thumb).should be_nil
+    assert_nil img.big_image.width(:thumb)
   end
 
   it "does not fails when file is not an image" do
     img = Image.new
     img.small_image = not_image
-    -> { img.save! }.should_not raise_error
-    img.small_image.width(:thumb).should be_nil
+    img.save!
+    assert_nil img.small_image.width(:thumb)
   end
 
   private
