@@ -7,6 +7,8 @@ Add width, height, and size to paperclip images.
 
 Paperclip Meta gets image dimensions after `post_process_styles` using paperclip's `Geometry.from_file`.
 
+Paperclip Meta works with paperclip versions 3.x and 4.x.
+
 ### Setup
 
 Add paperclip-meta to Gemfile:
