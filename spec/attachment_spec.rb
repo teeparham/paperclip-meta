@@ -30,7 +30,7 @@ describe "Attachment" do
     end
 
     it 'should save file size with meta data ' do
-      path = File.join(File.dirname(__FILE__), "../tmp/fixtures/tmp/thumb/#{@image.id}.jpg")
+      path = File.join(File.dirname(__FILE__), "tmp/fixtures/tmp/thumb/#{@image.id}.jpg")
       size = File.stat(path).size
       @image.big_image.size(:thumb).should == size
     end
@@ -65,7 +65,7 @@ describe "Attachment" do
   private
 
   def small_path
-    File.join(File.dirname(__FILE__), '..', 'fixtures', 'small.png')
+    File.join(File.dirname(__FILE__), 'fixtures', 'small.png')
   end
 
   def small_image
@@ -77,10 +77,10 @@ describe "Attachment" do
   end
 
   def big_image
-    File.open(File.join(File.dirname(__FILE__), '..', 'fixtures', 'big.jpg'))
+    File.open(File.join(File.dirname(__FILE__), 'fixtures', 'big.jpg'))
   end
 
   def not_image
-    File.open(File.join(File.dirname(__FILE__), '..', 'fixtures', 'big.zip'))
+    File.open(File.join(File.dirname(__FILE__), 'fixtures', 'big.zip'))
   end
 end
