@@ -3,13 +3,14 @@ $:.push File.expand_path("../lib", __FILE__)
 require "paperclip-meta/version"
 
 Gem::Specification.new do |s|
-  s.name        = "paperclip-meta"
-  s.version     = Paperclip::Meta::VERSION
-  s.authors     = ["Alexey Bondar", "Tee Parham"]
-  s.email       = ["y8@ya.ru", "tee@neighborland.com"]
-  s.homepage    = "http://github.com/teeparham/paperclip-meta"
-  s.summary     = %q{Add width, height, and size to paperclip images}
-  s.description = %q{Add width, height and size methods to paperclip images}
+  s.name          = "paperclip-meta"
+  s.version       = Paperclip::Meta::VERSION
+  s.authors       = ["Alexey Bondar", "Tee Parham"]
+  s.email         = ["y8@ya.ru", "tee@neighborland.com"]
+  s.homepage      = "http://github.com/teeparham/paperclip-meta"
+  s.summary       = %q{Add width, height, and size to paperclip images}
+  s.description   = %q{Add width, height and size methods to paperclip images}
+  s.license       = "MIT"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
