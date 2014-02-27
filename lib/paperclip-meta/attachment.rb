@@ -16,8 +16,8 @@ module Paperclip
           save_without_meta_data
         end
 
-        def post_process_styles_with_meta_data(*style_args)
-          post_process_styles_without_meta_data(*style_args)
+        def post_process_styles_with_meta_data(*styles)
+          post_process_styles_without_meta_data(*styles)
           return unless instance.respond_to?(:"#{name}_meta=")
 
           meta = populate_meta(@queued_for_write)
