@@ -32,7 +32,7 @@ module Paperclip
             begin
               geo = Geometry.from_file file
               meta[style] = { width: geo.width.to_i, height: geo.height.to_i, size: file.size }
-            rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
+            rescue Paperclip::Errors::NotIdentifiedByImageMagickError
               meta[style] = {}
             end
           end
@@ -42,15 +42,15 @@ module Paperclip
 
         # Use meta info for style if required
         def size_with_meta_data(style = nil)
-          style ? meta_read(style, :size) : size_without_meta_data
+          style ? read_meta(style, :size) : size_without_meta_data
         end
 
         def height(style = default_style)
-          meta_read style, :height
+          read_meta style, :height
         end
 
         def width(style = default_style)
-          meta_read style, :width
+          read_meta style, :width
         end
 
         # Return image dimesions ("WxH") for given style name. If style name not given,
@@ -63,12 +63,11 @@ module Paperclip
 
         def write_meta(meta)
           retain_meta(meta)
-
           instance.send("#{name}_meta=", meta_encode(meta))
         end
 
         # Return meta data for given style
-        def meta_read(style, item)
+        def read_meta(style, item)
           if instance.respond_to?(:"#{name}_meta") && instance_read(:meta)
             if (meta = meta_decode(instance_read(:meta)))
               meta.key?(style) ? meta[style][item] : nil
