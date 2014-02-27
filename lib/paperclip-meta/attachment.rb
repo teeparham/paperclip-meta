@@ -61,7 +61,7 @@ module Paperclip
         end
 
         def write_meta(meta)
-          retain_meta(meta)
+          merge_existing_hash meta
           instance.send("#{name}_meta=", meta_encode(meta))
         end
 
@@ -84,11 +84,9 @@ module Paperclip
           Marshal.load(Base64.decode64(meta))
         end
 
-        # Retrieves the original metadata
-        # if original meta exists replace old metadata with new metadata
-        # retains metadata relating to other styles that
-        # may not be processed on exclusive reprocess
-        def retain_meta(meta)
+        # Retain existing meta values that will not be recalculated when
+        # reprocessing a subset of styles
+        def merge_existing_hash(meta)
           return unless (original_meta = instance.send("#{name}_meta"))
           meta.merge! meta_decode(original_meta)
         end
