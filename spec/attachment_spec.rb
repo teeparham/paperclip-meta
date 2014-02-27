@@ -15,6 +15,12 @@ describe "Attachment" do
     assert_equal 100, img.big_image.height(:thumb)
   end
 
+  it "saves original style geometry" do
+    img = Image.create(small_image: small_image)
+    assert_equal 50, img.small_image.width(:original)
+    assert_equal 64, img.small_image.height(:original)
+  end
+
   it "sets geometry on update" do
     img = Image.create!
     img.small_image = small_image
