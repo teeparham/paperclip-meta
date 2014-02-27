@@ -96,12 +96,14 @@ describe "Attachment" do
     assert_equal 2, img.big_image.width(:large)
     assert_equal 3, img.big_image.size(:large)
     assert_nil img.big_image.height(:thumb)
+    assert_nil img.big_image.height(:original)
     img.big_image.reprocess!(:thumb)
     assert_equal 1, img.big_image.height(:large)
     assert_equal 2, img.big_image.width(:large)
     assert_equal 3, img.big_image.size(:large)
     assert_equal 100, img.big_image.height(:thumb)
     assert_equal 100, img.big_image.width(:thumb)
+    assert_equal 277, img.big_image.height(:original) # original is always reprocessed
   end
 
   private
