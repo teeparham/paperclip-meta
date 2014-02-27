@@ -89,17 +89,8 @@ module Paperclip
         # retains metadata relating to other styles that
         # may not be processed on exclusive reprocess
         def retain_meta(meta)
-          original_meta = instance.send("#{name}_meta")
-          return unless original_meta
-
-          original_meta = meta_decode(original_meta)
-
-          self.styles.keys.prepend(:original).each do |style|
-            next if meta[style].present?
-
-            meta[style] = original_meta[style]
-            meta[style] ||= {}
-          end
+          return unless (original_meta = instance.send("#{name}_meta"))
+          meta.merge! meta_decode(original_meta)
         end
       end
     end
