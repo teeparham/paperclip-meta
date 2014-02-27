@@ -32,7 +32,7 @@ class Image < ActiveRecord::Base
     storage: :filesystem,
     path: "./spec/tmp/fixtures/tmp/:style/:id.:extension",
     url: "./spec/tmp/fixtures/tmp/:style/:id.extension",
-    styles: { thumb: "100x100#" }
+    styles: { thumb: "100x100#", large: "500x500#" }
 
   # paperclip 4.0 requires a validator
   validates_attachment_content_type :small_image, content_type: /\Aimage/

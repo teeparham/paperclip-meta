@@ -68,6 +68,38 @@ describe "Attachment" do
     assert_nil img.small_image.height
   end
 
+  it "doesn't overwrite all metadata if reprocessing specific style" do
+    img             = Image.new
+    img.big_image   = big_image
+    img.save!
+
+    assert_equal 500, img.big_image.width(:large)
+
+    img.big_image.reprocess!(:thumb)
+
+    assert_equal 500, img.big_image.width(:large)
+  end
+
+  it "doesn't allow nils as meta when styles change" do
+    img = Image.new
+    img.big_image = big_image
+    img.save!
+
+    # Simulating a new style added later that hasn't been processed
+    # and is nullified
+    og_meta = img.big_image.send(:meta_decode, img.big_image_meta)
+    og_meta[:thumb] = nil
+    encoded = img.big_image.send(:meta_encode, og_meta)
+    img.update_column(:big_image_meta, encoded)
+
+    # Next update of meta
+    img.big_image.send(:write_meta, {thumb: {}})
+    img.save!
+
+    meta = img.big_image.send(:meta_decode, img.big_image_meta)
+    assert_equal Hash.new, meta[:thumb]
+  end
+
   private
 
   def small_path

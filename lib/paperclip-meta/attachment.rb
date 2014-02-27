@@ -20,19 +20,24 @@ module Paperclip
           post_process_styles_without_meta_data(*style_args)
           return unless instance.respond_to?(:"#{name}_meta=")
 
+          meta = populate_meta(@queued_for_write)
+          return if meta == {}
+
+          write_meta(meta)
+        end
+
+        def populate_meta(queue)
           meta = {}
-          @queued_for_write.each do |style, file|
+          queue.each do |style, file|
             begin
               geo = Geometry.from_file file
               meta[style] = { width: geo.width.to_i, height: geo.height.to_i, size: file.size }
-            rescue Paperclip::Errors::NotIdentifiedByImageMagickError
+            rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
               meta[style] = {}
             end
           end
 
-          return if meta == {}
-
-          instance.send("#{name}_meta=", meta_encode(meta))
+          meta
         end
 
         # Use meta info for style if required
@@ -56,6 +61,12 @@ module Paperclip
 
         private
 
+        def write_meta(meta)
+          retain_meta(meta)
+
+          instance.send("#{name}_meta=", meta_encode(meta))
+        end
+
         # Return meta data for given style
         def meta_read(style, item)
           if instance.respond_to?(:"#{name}_meta") && instance_read(:meta)
@@ -73,6 +84,24 @@ module Paperclip
         # Return decoded metadata as Object
         def meta_decode(meta)
           Marshal.load(Base64.decode64(meta))
+        end
+
+        # Retrieves the original metadata
+        # if original meta exists replace old metadata with new metadata
+        # retains metadata relating to other styles that
+        # may not be processed on exclusive reprocess
+        def retain_meta(meta)
+          original_meta = instance.send("#{name}_meta")
+          return unless original_meta
+
+          original_meta = meta_decode(original_meta)
+
+          self.styles.keys.prepend(:original).each do |style|
+            next if meta[style].present?
+
+            meta[style] = original_meta[style]
+            meta[style] ||= {}
+          end
         end
       end
     end
