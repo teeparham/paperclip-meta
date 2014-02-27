@@ -6,3 +6,6 @@ rvm:
 gemfile:
   - spec/gemfiles/Gemfile.paperclip-4
   - spec/gemfiles/Gemfile.paperclip-3
+matrix:
+  allow_failures:
+    - rvm: rbx-2
