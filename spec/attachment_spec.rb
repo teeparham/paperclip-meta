@@ -24,7 +24,7 @@ describe "Attachment" do
     assert_equal geometry.height, img.small_image.height
   end
 
-  describe 'file size' do
+  describe '#size' do
     before do
       @image = Image.create(big_image: big_image)
     end
@@ -68,36 +68,34 @@ describe "Attachment" do
     assert_nil img.small_image.height
   end
 
-  it "doesn't overwrite all metadata if reprocessing specific style" do
-    img             = Image.new
-    img.big_image   = big_image
+  it "preserves metadata when reprocessing a specific style" do
+    img = Image.new
+    img.big_image = big_image
     img.save!
-
     assert_equal 500, img.big_image.width(:large)
-
     img.big_image.reprocess!(:thumb)
-
     assert_equal 500, img.big_image.width(:large)
   end
 
-  it "doesn't allow nils as meta when styles change" do
+  it "preserves metadata for unprocessed styles" do
     img = Image.new
     img.big_image = big_image
     img.save!
 
-    # Simulating a new style added later that hasn't been processed
-    # and is nullified
-    og_meta = img.big_image.send(:meta_decode, img.big_image_meta)
-    og_meta[:thumb] = nil
-    encoded = img.big_image.send(:meta_encode, og_meta)
-    img.update_column(:big_image_meta, encoded)
+    # set big image meta to fake values for :large & missing :thumb
+    hash = { large: { height: 1, width: 2, size: 3 } }
+    img.update_column(:big_image_meta, img.big_image.send(:meta_encode, hash))
 
-    # Next update of meta
-    img.big_image.send(:write_meta, {thumb: {}})
-    img.save!
-
-    meta = img.big_image.send(:meta_decode, img.big_image_meta)
-    assert_equal Hash.new, meta[:thumb]
+    assert_equal 1, img.big_image.height(:large)
+    assert_equal 2, img.big_image.width(:large)
+    assert_equal 3, img.big_image.size(:large)
+    assert_nil img.big_image.height(:thumb)
+    img.big_image.reprocess!(:thumb)
+    assert_equal 1, img.big_image.height(:large)
+    assert_equal 2, img.big_image.width(:large)
+    assert_equal 3, img.big_image.size(:large)
+    assert_equal 100, img.big_image.height(:thumb)
+    assert_equal 100, img.big_image.width(:thumb)
   end
 
   private
