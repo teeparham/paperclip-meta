@@ -26,20 +26,6 @@ module Paperclip
           write_meta(meta)
         end
 
-        def populate_meta(queue)
-          meta = {}
-          queue.each do |style, file|
-            begin
-              geo = Geometry.from_file file
-              meta[style] = { width: geo.width.to_i, height: geo.height.to_i, size: file.size }
-            rescue Paperclip::Errors::NotIdentifiedByImageMagickError
-              meta[style] = {}
-            end
-          end
-
-          meta
-        end
-
         # Use meta info for style if required
         def size_with_meta_data(style = nil)
           style ? read_meta(style, :size) : size_without_meta_data
@@ -60,6 +46,19 @@ module Paperclip
         end
 
         private
+
+        def populate_meta(queue)
+          meta = {}
+          queue.each do |style, file|
+            begin
+              geo = Geometry.from_file file
+              meta[style] = { width: geo.width.to_i, height: geo.height.to_i, size: file.size }
+            rescue Paperclip::Errors::NotIdentifiedByImageMagickError
+              meta[style] = {}
+            end
+          end
+          meta
+        end
 
         def write_meta(meta)
           retain_meta(meta)
