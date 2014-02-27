@@ -88,7 +88,7 @@ module Paperclip
         # reprocessing a subset of styles
         def merge_existing_meta_hash(meta)
           return unless (original_meta = instance.send("#{name}_meta"))
-          meta.merge! meta_decode(original_meta)
+          meta.reverse_merge! meta_decode(original_meta)
         end
       end
     end

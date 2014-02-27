@@ -7,6 +7,7 @@ describe "Attachment" do
     geometry = geometry_for(small_path)
     assert_equal geometry.width, img.small_image.width
     assert_equal geometry.height, img.small_image.height
+    assert_equal "50x64", img.small_image.image_size
   end
 
   it "saves geometry for styles" do
@@ -106,12 +107,24 @@ describe "Attachment" do
     assert_equal 277, img.big_image.height(:original) # original is always reprocessed
   end
 
+  it "replaces metadata when attachment changes" do
+    img = Image.new
+    img.big_image = big_image
+    img.save!
+    img.big_image = small_image
+    img.save!
+    assert_equal "50x64", img.big_image.image_size
+    assert_equal "100x100", img.big_image.image_size(:thumb)
+    assert_equal "500x500", img.big_image.image_size(:large)
+  end
+
   private
 
   def small_path
     File.join(File.dirname(__FILE__), 'fixtures', 'small.png')
   end
 
+  # 50x64
   def small_image
     File.open(small_path)
   end
@@ -120,6 +133,7 @@ describe "Attachment" do
     Paperclip::Geometry.from_file(path)
   end
 
+  # 600x277
   def big_image
     File.open(File.join(File.dirname(__FILE__), 'fixtures', 'big.jpg'))
   end
