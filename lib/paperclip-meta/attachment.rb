@@ -61,7 +61,7 @@ module Paperclip
         end
 
         def write_meta(meta)
-          merge_existing_hash meta
+          merge_existing_meta_hash meta
           instance.send("#{name}_meta=", meta_encode(meta))
         end
 
@@ -86,7 +86,7 @@ module Paperclip
 
         # Retain existing meta values that will not be recalculated when
         # reprocessing a subset of styles
-        def merge_existing_hash(meta)
+        def merge_existing_meta_hash(meta)
           return unless (original_meta = instance.send("#{name}_meta"))
           meta.merge! meta_decode(original_meta)
         end
