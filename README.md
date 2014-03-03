@@ -31,10 +31,10 @@ Rebuild all thumbnails to populate the meta column if you already have some atta
 
 Now you can grab the size from the paperclip attachment:
 
-```
-<%= image_tag user.avatar.url, size: user.avatar.image_size %>
-<%= image_tag user.avatar.url(:medium), size: user.avatar.image_size(:medium) %>
-<%= image_tag user.avatar.url(:thumb), size: user.avatar.image_size(:thumb) %>
+```ruby
+image_tag user.avatar.url, size: user.avatar.image_size
+image_tag user.avatar.url(:medium), size: user.avatar.image_size(:medium)
+image_tag user.avatar.url(:thumb), size: user.avatar.image_size(:thumb)
 ```
 
 ### Internals
