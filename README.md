@@ -1,7 +1,7 @@
 # Paperclip Meta 
 
-[![Gem Version](https://badge.fury.io/rb/paperclip-meta.png)](http://badge.fury.io/rb/paperclip-meta)
-[![Build Status](https://travis-ci.org/teeparham/paperclip-meta.png)](https://travis-ci.org/teeparham/paperclip-meta)
+[![Gem Version](http://img.shields.io/gem/v/paperclip-meta.svg)](http://rubygems.org/gems/paperclip-meta)
+[![Build Status](http://img.shields.io/travis/teeparham/paperclip-meta.svg)](https://travis-ci.org/teeparham/paperclip-meta)
 
 Add width, height, and size to paperclip images.
 
