@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "bundler", "~> 1.5"
   s.add_development_dependency "rake", "~> 10.1"
-  s.add_development_dependency "minitest", ">= 4.7"
   s.add_development_dependency "mocha", "~> 1.0"
   s.add_development_dependency "activerecord", ">= 4.0"
 
