@@ -51,14 +51,14 @@ style: {
 
 This hash will be marshaled and base64 encoded before writing to model attribute.
 
-`height`, `width`, and `size` methods are provided:
+`height`, `width`, and `image_size` methods are provided:
 
 ```ruby
 user.avatar.width(:thumb)
 => 100
 user.avatar.height(:medium)
 => 200
-user.avatar.size
+user.avatar.image_size
 => '60x70'
 ```
 
