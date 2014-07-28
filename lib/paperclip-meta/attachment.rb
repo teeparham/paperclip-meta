@@ -18,7 +18,7 @@ module Paperclip
 
         def post_process_styles_with_meta_data(*styles)
           post_process_styles_without_meta_data(*styles)
-          return unless instance.respond_to?(:"#{name}_meta=")
+          return unless instance_respond_to?(:meta)
 
           meta = populate_meta(@queued_for_write)
           return if meta == {}
@@ -67,7 +67,7 @@ module Paperclip
 
         # Return meta data for given style
         def read_meta(style, item)
-          if instance.respond_to?(:"#{name}_meta") && instance_read(:meta)
+          if instance_read(:meta)
             if (meta = meta_decode(instance_read(:meta)))
               meta[style] && meta[style][item]
             end
@@ -87,7 +87,7 @@ module Paperclip
         # Retain existing meta values that will not be recalculated when
         # reprocessing a subset of styles
         def merge_existing_meta_hash(meta)
-          return unless (original_meta = instance.send("#{name}_meta"))
+          return unless (original_meta = instance_read(:meta))
           meta.reverse_merge! meta_decode(original_meta)
         end
       end
