@@ -1,24 +1,43 @@
 module Paperclip
   module Meta
     module Attachment
+      @@default_meta_data_attribute = :meta
+
+      def self.default_meta_data_attribute
+        @@default_meta_data_attribute
+      end
+      
+      def self.default_meta_data_attribute=(attrib)
+        @@default_meta_data_attribute = attrib
+      end
+      
       def self.included(base)
         base.send :include, InstanceMethods
+        base.extend ClassMethods
         base.alias_method_chain :save, :meta_data
         base.alias_method_chain :post_process_styles, :meta_data
         base.alias_method_chain :size, :meta_data
       end
 
       module InstanceMethods
+        def meta_data_attribute
+          if instance.respond_to?(:meta_data_attribute) 
+            instance.meta_data_attribute
+          else
+            Paperclip::Meta::Attachment.default_meta_data_attribute
+          end
+        end
+        
         def save_with_meta_data
           if @queued_for_delete.any? && @queued_for_write.empty?
-            instance_write(:meta, meta_encode({}))
+            instance_write(meta_data_attribute, meta_encode({}))
           end
           save_without_meta_data
         end
 
         def post_process_styles_with_meta_data(*styles)
           post_process_styles_without_meta_data(*styles)
-          return unless instance_respond_to?(:meta)
+          return unless instance_respond_to?(meta_data_attribute)
 
           meta = populate_meta(@queued_for_write)
           return if meta == {}
@@ -67,8 +86,8 @@ module Paperclip
 
         # Return meta data for given style
         def read_meta(style, item)
-          if instance_read(:meta)
-            if (meta = meta_decode(instance_read(:meta)))
+          if instance_read(meta_data_attribute)
+            if (meta = meta_decode(instance_read(meta_data_attribute)))
               meta[style] && meta[style][item]
             end
           end
@@ -87,7 +106,7 @@ module Paperclip
         # Retain existing meta values that will not be recalculated when
         # reprocessing a subset of styles
         def merge_existing_meta_hash(meta)
-          return unless (original_meta = instance_read(:meta))
+          return unless (original_meta = instance_read(meta_data_attribute))
           meta.reverse_merge! meta_decode(original_meta)
         end
       end
