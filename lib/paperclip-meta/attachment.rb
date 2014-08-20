@@ -6,6 +6,7 @@ module Paperclip
         base.alias_method_chain :save, :meta_data
         base.alias_method_chain :post_process_styles, :meta_data
         base.alias_method_chain :size, :meta_data
+        base.alias_method_chain :fingerprint, :meta_data
       end
 
       module InstanceMethods
@@ -31,6 +32,10 @@ module Paperclip
           style ? read_meta(style, :size) : size_without_meta_data
         end
 
+        def fingerprint_with_meta_data(style = nil)
+          read_meta(style || :original, :fingerprint)
+        end
+
         def height(style = default_style)
           read_meta style, :height
         end
@@ -52,7 +57,10 @@ module Paperclip
           queue.each do |style, file|
             begin
               geo = Geometry.from_file file
-              meta[style] = { width: geo.width.to_i, height: geo.height.to_i, size: file.size }
+              meta[style] = { width: geo.width.to_i,
+                              height: geo.height.to_i,
+                              size: file.size,
+                              fingerprint: file.fingerprint }
             rescue Paperclip::Errors::NotIdentifiedByImageMagickError
               meta[style] = {}
             end
