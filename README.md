@@ -1,4 +1,4 @@
-# Paperclip Meta 
+# Paperclip Meta
 
 [![Gem Version](https://badge.fury.io/rb/paperclip-meta.svg)](http://rubygems.org/gems/paperclip-meta)
 [![Build Status](https://travis-ci.org/teeparham/paperclip-meta.svg?branch=master)](https://travis-ci.org/teeparham/paperclip-meta)
@@ -45,13 +45,14 @@ The meta column is simple hash:
 style: {
   width:  100,
   height: 100,
-  size:   42000
+  size:   42000,
+  fingerprint: 'b5ca2374a6cd89c4a971ddeb71f6f86d'
 }
 ```
 
 This hash will be marshaled and base64 encoded before writing to model attribute.
 
-`height`, `width`, and `image_size` methods are provided:
+`height`, `width`, `image_size`, and `fingerprint` methods are provided:
 
 ```ruby
 user.avatar.width(:thumb)
@@ -60,6 +61,10 @@ user.avatar.height(:medium)
 => 200
 user.avatar.image_size
 => '60x70'
+user.avatar.fingerprint
+=> 'b5ca2374a6cd89c4a971ddeb71f6f86d'
+user.avatar.fingerprint(:thumb)
+=> '9c0a079bdd7701d7e729bd956823d153'
 ```
 
 You can pass the image style to these methods. If a style is not passed, the default style will be used.

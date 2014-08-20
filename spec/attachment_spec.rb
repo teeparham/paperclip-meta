@@ -22,13 +22,23 @@ describe "Attachment" do
     assert_equal 64, img.small_image.height(:original)
   end
 
-  it "sets geometry on update" do
+  it "saves original style fingerprint" do
+    img = Image.create(small_image: small_image)
+    assert_equal fingerprint_for(small_path), img.small_image.fingerprint(:original)
+  end
+
+  it "updates meta data when file changes" do
     img = Image.create!
+    geometry = geometry_for(small_path)
+    fingerprint = fingerprint_for(small_path)
+    refute_equal geometry.width, img.small_image.width
+    refute_equal geometry.height, img.small_image.height
+    refute_equal fingerprint, img.small_image.fingerprint
     img.small_image = small_image
     img.save
-    geometry = geometry_for(small_path)
     assert_equal geometry.width, img.small_image.width
     assert_equal geometry.height, img.small_image.height
+    assert_equal fingerprint, img.small_image.fingerprint
   end
 
   describe '#size' do
@@ -49,6 +59,15 @@ describe "Attachment" do
 
     it 'should have access to original file size' do
       assert_equal 37042, @image.big_image.size
+    end
+  end
+
+  describe '#fingerprint' do
+    it 'should save fingerprint with meta data ' do
+      image = Image.create(big_image: big_image)
+      path = File.join(File.dirname(__FILE__), "tmp/fixtures/tmp/thumb/#{image.id}.jpg")
+      fingerprint = fingerprint_for(path)
+      assert_equal fingerprint, image.big_image.fingerprint(:thumb)
     end
   end
 
@@ -131,6 +150,10 @@ describe "Attachment" do
 
   def geometry_for(path)
     Paperclip::Geometry.from_file(path)
+  end
+
+  def fingerprint_for(path)
+    Digest::MD5.file(path).hexdigest
   end
 
   # 600x277
