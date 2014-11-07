@@ -6,3 +6,5 @@ rvm:
 gemfile:
   - spec/gemfiles/Gemfile.paperclip-4
   - spec/gemfiles/Gemfile.paperclip-3
+install:
+  - bundle install --retry=3
