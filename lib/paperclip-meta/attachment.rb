@@ -39,6 +39,10 @@ module Paperclip
           read_meta style, :width
         end
 
+        def aspect_ratio(style = default_style)
+          width(style).to_f / height(style).to_f
+        end
+
         # Return image dimesions ("WxH") for given style name. If style name not given,
         # return dimesions for default_style.
         def image_size(style = default_style)
