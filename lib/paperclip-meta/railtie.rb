@@ -9,6 +9,9 @@ module Paperclip
           ActiveSupport.on_load :active_record do
             Paperclip::Meta::Railtie.insert
           end
+          ActiveSupport.on_load :mongoid do
+            Paperclip::Meta::Railtie.insert
+          end
         end
       end
     end
