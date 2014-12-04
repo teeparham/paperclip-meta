@@ -51,7 +51,7 @@ style: {
 
 This hash will be marshaled and base64 encoded before writing to model attribute.
 
-`height`, `width`, and `image_size` methods are provided:
+`height`, `width`, `image_size` and `aspect_ratio` methods are provided:
 
 ```ruby
 user.avatar.width(:thumb)
@@ -60,6 +60,8 @@ user.avatar.height(:medium)
 => 200
 user.avatar.image_size
 => '60x70'
+user.avatar.aspect_ratio
+=> 1.5
 ```
 
 You can pass the image style to these methods. If a style is not passed, the default style will be used.
