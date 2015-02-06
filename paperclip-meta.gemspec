@@ -25,8 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rake", "~> 10.1"
   s.add_development_dependency "mocha", "~> 1.0"
   s.add_development_dependency "activerecord", ">= 4.0"
-
-  # sqlite3 1.3.9 does not work with rubinius 2.2.5:
-  # https://github.com/sparklemotion/sqlite3-ruby/issues/122
-  s.add_development_dependency "sqlite3", "1.3.8"
+  s.add_development_dependency "sqlite3", ">= 1.3.10"
 end
