@@ -22,6 +22,11 @@ Paperclip::Meta::Railtie.insert
 
 I18n.enforce_available_locales = true
 
+# suppress AR 4.2 warnings
+if ActiveRecord::Base.respond_to?(:raise_in_transactional_callbacks)
+  ActiveRecord::Base.raise_in_transactional_callbacks = true
+end
+
 class Image < ActiveRecord::Base
   has_attached_file :small_image,
     storage: :filesystem,
