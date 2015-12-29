@@ -49,7 +49,7 @@ describe "Attachment" do
     end
 
     it "should have access to original file size" do
-      assert_equal 37042, @image.big_image.size
+      assert_equal 37_042, @image.big_image.size
     end
   end
 

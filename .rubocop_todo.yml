@@ -35,11 +35,6 @@ Style/GuardClause:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/NumericLiterals:
-  MinDigits: 6
-
-# Offense count: 1
-# Cop supports --auto-correct.
 Style/SpecialGlobalVars:
   Exclude:
     - 'paperclip-meta.gemspec'
