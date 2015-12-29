@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "Attachment" do
   it "saves image geometry for original image" do
@@ -8,7 +8,7 @@ describe "Attachment" do
     assert_equal geometry.width, img.small_image.width
     assert_equal geometry.height, img.small_image.height
     assert_equal "50x64", img.small_image.image_size
-    assert_equal (50.0 / 64.0), img.small_image.aspect_ratio
+    assert_equal((50.0 / 64.0), img.small_image.aspect_ratio)
   end
 
   it "saves geometry for styles" do
@@ -37,19 +37,19 @@ describe "Attachment" do
       @image = Image.create(big_image: big_image)
     end
 
-    it 'should save file size with meta data ' do
+    it "should save file size with meta data " do
       path = File.join(File.dirname(__FILE__), "tmp/fixtures/tmp/thumb/#{@image.id}.jpg")
       size = File.stat(path).size
       assert_equal size, @image.big_image.size(:thumb)
     end
 
-    it 'should access normal paperclip method when no style passed' do
+    it "should access normal paperclip method when no style passed" do
       @image.big_image.expects size_without_meta_data: 1234
       assert_equal 1234, @image.big_image.size
     end
 
-    it 'should have access to original file size' do
-      assert_equal 37042, @image.big_image.size
+    it "should have access to original file size" do
+      assert_equal 37_042, @image.big_image.size
     end
   end
 
@@ -117,15 +117,15 @@ describe "Attachment" do
     assert_equal "50x64", img.big_image.image_size
     assert_equal "100x100", img.big_image.image_size(:thumb)
     assert_equal "500x500", img.big_image.image_size(:large)
-    assert_equal (50.0 / 64.0), img.big_image.aspect_ratio
-    assert_equal (100.0 / 100.0), img.big_image.aspect_ratio(:thumb)
-    assert_equal (500.0 / 500.0), img.big_image.aspect_ratio(:large)
+    assert_equal((50.0 / 64.0), img.big_image.aspect_ratio)
+    assert_equal((100.0 / 100.0), img.big_image.aspect_ratio(:thumb))
+    assert_equal((500.0 / 500.0), img.big_image.aspect_ratio(:large))
   end
 
   private
 
   def small_path
-    File.join(File.dirname(__FILE__), 'fixtures', 'small.png')
+    File.join(File.dirname(__FILE__), "fixtures", "small.png")
   end
 
   # 50x64
@@ -139,10 +139,10 @@ describe "Attachment" do
 
   # 600x277
   def big_image
-    File.open(File.join(File.dirname(__FILE__), 'fixtures', 'big.jpg'))
+    File.open(File.join(File.dirname(__FILE__), "fixtures", "big.jpg"))
   end
 
   def not_image
-    File.open(File.join(File.dirname(__FILE__), 'fixtures', 'big.zip'))
+    File.open(File.join(File.dirname(__FILE__), "fixtures", "big.zip"))
   end
 end
