@@ -38,13 +38,6 @@ Style/GuardClause:
 Style/NumericLiterals:
   MinDigits: 6
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Exclude:
-    - 'paperclip-meta.gemspec'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/SpecialGlobalVars:
@@ -57,8 +50,3 @@ Style/SpecialGlobalVars:
 Style/StringLiterals:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/UnneededPercentQ:
-  Exclude:
-    - 'paperclip-meta.gemspec'

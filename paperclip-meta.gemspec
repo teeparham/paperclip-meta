@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors       = ["Alexey Bondar", "Tee Parham"]
   s.email         = ["y8@ya.ru", "tee@neighborland.com"]
   s.homepage      = "http://github.com/teeparham/paperclip-meta"
-  s.summary       = %q{Add width, height, and size to paperclip images}
-  s.description   = %q{Add width, height and size methods to paperclip images}
+  s.summary       = 'Add width, height, and size to paperclip images'
+  s.description   = 'Add width, height and size methods to paperclip images'
   s.license       = "MIT"
 
   s.files         = `git ls-files`.split("\n")
