@@ -5,7 +5,6 @@ rvm:
   - 2.2
   - 2.1
   - 2.0.0
-  - 1.9.3
 gemfile:
   - spec/gemfiles/Gemfile.paperclip-4
   - spec/gemfiles/Gemfile.paperclip-3

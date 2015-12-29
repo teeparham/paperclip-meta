@@ -17,12 +17,12 @@ Gem::Specification.new do |s|
   s.executables   = []
   s.require_paths = ["lib"]
 
-  s.required_ruby_version = ">= 1.9.3"
+  s.required_ruby_version = ">= 2.0.0"
 
   s.add_dependency "paperclip", ">= 3.0.2", "< 5.0"
 
   s.add_development_dependency "bundler", "~> 1.5"
-  s.add_development_dependency "rake", "~> 10.1"
+  s.add_development_dependency "rake", "~> 10.4"
   s.add_development_dependency "mocha", "~> 1.0"
   s.add_development_dependency "activerecord", ">= 4.0"
   s.add_development_dependency "sqlite3", ">= 1.3.10"
