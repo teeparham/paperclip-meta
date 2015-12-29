@@ -7,11 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 4
-Lint/ParenthesesAsGroupedExpression:
-  Exclude:
-    - 'spec/attachment_spec.rb'
-
-# Offense count: 4
 # Configuration parameters: AllowURI, URISchemes.
 Metrics/LineLength:
   Max: 95

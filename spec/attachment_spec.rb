@@ -8,7 +8,7 @@ describe "Attachment" do
     assert_equal geometry.width, img.small_image.width
     assert_equal geometry.height, img.small_image.height
     assert_equal "50x64", img.small_image.image_size
-    assert_equal (50.0 / 64.0), img.small_image.aspect_ratio
+    assert_equal((50.0 / 64.0), img.small_image.aspect_ratio)
   end
 
   it "saves geometry for styles" do
@@ -117,9 +117,9 @@ describe "Attachment" do
     assert_equal "50x64", img.big_image.image_size
     assert_equal "100x100", img.big_image.image_size(:thumb)
     assert_equal "500x500", img.big_image.image_size(:large)
-    assert_equal (50.0 / 64.0), img.big_image.aspect_ratio
-    assert_equal (100.0 / 100.0), img.big_image.aspect_ratio(:thumb)
-    assert_equal (500.0 / 500.0), img.big_image.aspect_ratio(:large)
+    assert_equal((50.0 / 64.0), img.big_image.aspect_ratio)
+    assert_equal((100.0 / 100.0), img.big_image.aspect_ratio(:thumb))
+    assert_equal((500.0 / 500.0), img.big_image.aspect_ratio(:large))
   end
 
   private
