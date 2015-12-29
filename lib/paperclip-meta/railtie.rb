@@ -1,4 +1,4 @@
-require 'paperclip-meta'
+require "paperclip-meta"
 
 module Paperclip
   module Meta

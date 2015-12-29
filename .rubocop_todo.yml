@@ -44,9 +44,3 @@ Style/SpecialGlobalVars:
   Exclude:
     - 'paperclip-meta.gemspec'
 
-# Offense count: 25
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
-
