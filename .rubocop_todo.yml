@@ -22,13 +22,6 @@ Style/Documentation:
     - 'lib/paperclip-meta/version.rb'
 
 # Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'lib/paperclip-meta/railtie.rb'
-
-# Offense count: 1
 # Configuration parameters: Exclude.
 Style/FileName:
   Exclude:
@@ -52,12 +45,6 @@ Style/PercentLiteralDelimiters:
   Exclude:
     - 'paperclip-meta.gemspec'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Exclude:
-    - 'spec/schema.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/SpecialGlobalVars:
@@ -69,12 +56,6 @@ Style/SpecialGlobalVars:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/StringLiterals:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Exclude:
-    - 'lib/paperclip-meta/railtie.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.

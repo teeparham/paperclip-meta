@@ -2,7 +2,6 @@ require 'paperclip-meta'
 
 module Paperclip
   module Meta
-    
     if defined? ::Rails::Railtie
       class Railtie < ::Rails::Railtie
         initializer :paperclip_meta do
@@ -18,6 +17,5 @@ module Paperclip
         Paperclip::Attachment.send(:include, Paperclip::Meta::Attachment)
       end
     end
-
   end
 end
