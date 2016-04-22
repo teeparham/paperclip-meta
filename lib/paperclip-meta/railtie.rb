@@ -1,5 +1,3 @@
-require "paperclip-meta"
-
 module Paperclip
   module Meta
     if defined? ::Rails::Railtie
