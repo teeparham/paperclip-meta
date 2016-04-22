@@ -39,7 +39,6 @@ class Image < ActiveRecord::Base
     url: "./spec/tmp/fixtures/tmp/:style/:id.extension",
     styles: { thumb: "100x100#", large: "500x500#" }
 
-  # paperclip 4.0 requires a validator
   validates_attachment_content_type :small_image, content_type: /\Aimage/
   validates_attachment_content_type :big_image, content_type: /\Aimage/
 end
@@ -52,7 +51,5 @@ class ImageWithNoValidation < ActiveRecord::Base
     path: "./spec/tmp/:style/:id.:extension",
     url: "./spec/tmp/:style/:id.extension"
 
-  if Paperclip::VERSION >= "4.0"
-    do_not_validate_attachment_file_type :small_image
-  end
+  do_not_validate_attachment_file_type :small_image
 end
