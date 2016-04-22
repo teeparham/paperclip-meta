@@ -2,11 +2,14 @@ language: ruby
 cache: bundler
 sudo: false
 rvm:
+  - 2.3.0
   - 2.2
   - 2.1
   - 2.0.0
 gemfile:
   - spec/gemfiles/Gemfile.paperclip-4
   - spec/gemfiles/Gemfile.paperclip-3
+before_install:
+  - gem update bundler
 install:
   - bundle install --retry=3
