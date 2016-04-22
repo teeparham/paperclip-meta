@@ -122,6 +122,30 @@ describe "Attachment" do
     assert_equal((500.0 / 500.0), img.big_image.aspect_ratio(:large))
   end
 
+  describe "when using delayed_paperclip" do
+    include ActiveJob::TestHelper
+
+    it "saves image geometry for original image during creation" do
+      img = ImageWithDelayedPostProcessing.create(big_image: big_image)
+      assert_equal "600x277", img.big_image.image_size
+    end
+
+    it "does not save image geometry for other styles until post processing" do
+      img = ImageWithDelayedPostProcessing.create(big_image: big_image)
+      assert_equal "x", img.big_image.image_size(:thumb)
+      assert_equal "x", img.big_image.image_size(:large)
+
+      job_args = enqueued_jobs.last[:args]
+      job = DelayedPaperclip::Jobs::ActiveJob.new
+      job.perform(*job_args)
+      img.reload
+
+      assert_equal "100x100", img.big_image.image_size(:thumb)
+      assert_equal "500x500", img.big_image.image_size(:large)
+      assert_equal "600x277", img.big_image.image_size
+    end
+  end
+
   private
 
   def small_path
