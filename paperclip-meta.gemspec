@@ -12,9 +12,7 @@ Gem::Specification.new do |s|
   s.description   = "Add width, height and size methods to paperclip images"
   s.license       = "MIT"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec}/*`.split("\n")
-  s.executables   = []
+  s.files         = Dir["LICENSE.txt", "README.md", "lib/**/*"]
   s.require_paths = ["lib"]
 
   s.required_ruby_version = ">= 2.0.0"
