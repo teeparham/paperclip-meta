@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "paperclip", ">= 3.0.2", "< 5.0"
 
-  s.add_development_dependency "bundler", "~> 1.5"
+  s.add_development_dependency "bundler", "~> 1.10"
   s.add_development_dependency "rake", "~> 11.0"
   s.add_development_dependency "mocha", "~> 1.0"
   s.add_development_dependency "activerecord", ">= 4.0"
