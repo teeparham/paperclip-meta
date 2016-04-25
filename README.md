@@ -37,6 +37,23 @@ image_tag user.avatar.url(:medium), size: user.avatar.image_size(:medium)
 image_tag user.avatar.url(:thumb), size: user.avatar.image_size(:thumb)
 ```
 
+If you want to use a different column extension you can either set it in an initializer for all models
+
+```ruby
+  # uses User#avatar_sizes instead of User#avatar_meta
+  Paperclip::Meta::Attachment.default_meta_data_attribute = :sizes
+```
+
+Or you can for specific models by adding a method to the model
+
+```ruby
+  class User
+    def meta_data_attribute
+      :sizes
+    end
+  end
+```
+
 ### Internals
 
 The meta column is simple hash:
