@@ -12,6 +12,6 @@ end
 # See paperclip-meta.gemspec
 gemspec path: '../..'
 
-gem 'activerecord', '~> 4.1'
+gem 'activerecord', '~> 4.2'
 gem 'minitest', '~> 5.3'
 gem 'paperclip', '~> 4.0'
