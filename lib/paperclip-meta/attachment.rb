@@ -103,6 +103,8 @@ module Paperclip
         def merge_existing_meta_hash(meta)
           return unless (original_meta = instance.send("#{name}_meta"))
           meta.reverse_merge! meta_decode(original_meta)
+        rescue TypeError
+          meta.reverse_merge! eval(original_meta)
         end
       end
     end
