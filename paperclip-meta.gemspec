@@ -17,11 +17,12 @@ Gem::Specification.new do |s|
 
   s.add_dependency "paperclip", "~> 4.0"
 
-  s.add_development_dependency "bundler", "~> 1.10"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "rake", "~> 11.0"
   s.add_development_dependency "mocha", "~> 1.0"
   s.add_development_dependency "activerecord", ">= 4.2"
   s.add_development_dependency "sqlite3", ">= 1.3.10"
-  s.add_development_dependency "delayed_paperclip", ">= 2.9.1"
+  s.add_development_dependency "delayed_paperclip", ">= 3.0"
+  s.add_development_dependency "railties"
   s.add_development_dependency "activejob", ">= 4.2"
 end

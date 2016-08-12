@@ -8,3 +8,5 @@ end
 gemspec
 
 gem "paperclip"
+# Temporarily depending on this fork for development
+gem 'delayed_paperclip', github: 'whatcould/delayed_paperclip'

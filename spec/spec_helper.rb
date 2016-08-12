@@ -1,8 +1,10 @@
 require "bundler/setup"
 Bundler.require(:default)
+require 'rails'
 require "active_record"
 require "active_job"
 require "delayed_paperclip"
+require "delayed_paperclip/railtie"
 require "minitest/autorun"
 require "mocha/setup"
 
