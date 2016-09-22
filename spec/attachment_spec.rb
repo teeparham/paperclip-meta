@@ -43,11 +43,6 @@ describe "Attachment" do
       assert_equal size, @image.big_image.size(:thumb)
     end
 
-    it "should access normal paperclip method when no style passed" do
-      @image.big_image.expects size_without_meta_data: 1234
-      assert_equal 1234, @image.big_image.size
-    end
-
     it "should have access to original file size" do
       assert_equal 37_042, @image.big_image.size
     end
