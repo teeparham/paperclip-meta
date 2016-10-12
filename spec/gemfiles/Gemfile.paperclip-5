@@ -14,4 +14,4 @@ gemspec path: '../..'
 
 gem 'activerecord', '~> 4.2'
 gem 'minitest', '~> 5.3'
-gem 'paperclip', '~> 4.0'
+gem 'paperclip', '~> 5.0'

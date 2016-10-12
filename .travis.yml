@@ -5,9 +5,8 @@ rvm:
   - 2.3.0
   - 2.2
   - 2.1
-  - 2.0.0
 gemfile:
-  - spec/gemfiles/Gemfile.paperclip-4
+  - spec/gemfiles/Gemfile.paperclip-5
 before_install:
   - gem update bundler
 install:
