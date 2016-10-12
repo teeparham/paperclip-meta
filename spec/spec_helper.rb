@@ -1,7 +1,11 @@
 require "bundler/setup"
+# Paperclip gem requires module#delegate before initialization
+require 'active_support/core_ext/module'
 Bundler.require(:default)
+require 'rails'
 require "active_record"
 require "active_job"
+require "paperclip"
 require "delayed_paperclip"
 require "minitest/autorun"
 require "mocha/setup"

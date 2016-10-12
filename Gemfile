@@ -7,4 +7,5 @@ end
 # See paperclip-meta.gemspec
 gemspec
 
+gem 'activesupport', '~> 5'
 gem "paperclip"
