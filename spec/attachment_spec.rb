@@ -131,7 +131,7 @@ describe "Attachment" do
       assert_equal "x", img.big_image.image_size(:large)
 
       job_args = enqueued_jobs.last[:args]
-      job = DelayedPaperclip::Jobs::ActiveJob.new
+      job = DelayedPaperclip::ProcessJob.new
       job.perform(*job_args)
       img.reload
 
