@@ -1,4 +1,4 @@
-# Paperclip Meta 
+# Paperclip Meta
 
 [![Gem Version](https://badge.fury.io/rb/paperclip-meta.svg)](http://rubygems.org/gems/paperclip-meta)
 [![Build Status](https://travis-ci.org/teeparham/paperclip-meta.svg?branch=master)](https://travis-ci.org/teeparham/paperclip-meta)
@@ -7,7 +7,9 @@ Add width, height, and size to paperclip images.
 
 Paperclip Meta gets image dimensions after `post_process_styles` using paperclip's `Geometry.from_file`.
 
-Paperclip Meta works with paperclip version 4.x.
+Paperclip Meta works with paperclip version 5.x.
+
+Version 2.x works with paperclip version 4.x.
 
 ### Setup
 
@@ -76,12 +78,5 @@ Test:
 
 ```sh
 bundle
-rake
-```
-
-Test paperclip 4.x:
-
-```sh
-BUNDLE_GEMFILE=./spec/gemfiles/Gemfile.paperclip-4 bundle
-BUNDLE_GEMFILE=./spec/gemfiles/Gemfile.paperclip-4 rake
+bundle exec rake
 ```
