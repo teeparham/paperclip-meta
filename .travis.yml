@@ -4,11 +4,3 @@ sudo: false
 rvm:
   - 2.3.1
   - 2.2.5
-  - 2.1
-  - 2.0.0
-gemfile:
-  - spec/gemfiles/Gemfile.paperclip-4
-before_install:
-  - gem update bundler
-install:
-  - bundle install --retry=3
