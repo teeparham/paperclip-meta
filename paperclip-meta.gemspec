@@ -13,15 +13,17 @@ Gem::Specification.new do |s|
   s.files         = Dir["LICENSE.txt", "README.md", "lib/**/*"]
   s.require_paths = ["lib"]
 
-  s.required_ruby_version = ">= 2.0.0"
+  s.required_ruby_version = ">= 2.2.2"
 
-  s.add_dependency "paperclip", "~> 4.0"
+  s.add_dependency "paperclip", "~> 5.0"
 
-  s.add_development_dependency "bundler", "~> 1.10"
-  s.add_development_dependency "rake", "~> 11.0"
-  s.add_development_dependency "mocha", "~> 1.0"
-  s.add_development_dependency "activerecord", ">= 4.2"
+  s.add_development_dependency "bundler", "~> 1.13"
+  s.add_development_dependency "rake", "~> 11.3"
+  s.add_development_dependency "mocha", "~> 1.2"
+  s.add_development_dependency "activerecord", "~> 5.0"
   s.add_development_dependency "sqlite3", ">= 1.3.10"
-  s.add_development_dependency "delayed_paperclip", "~> 2.9"
-  s.add_development_dependency "activejob", ">= 4.2"
+  s.add_development_dependency "delayed_paperclip", "~> 3.0"
+  s.add_development_dependency "activesupport", "~> 5.0"
+  s.add_development_dependency "activejob", "~> 5.0"
+  s.add_development_dependency "railties", "~> 5.0"
 end
