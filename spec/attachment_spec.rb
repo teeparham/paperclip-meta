@@ -32,7 +32,7 @@ describe "Attachment" do
     assert_equal geometry.height, img.small_image.height
   end
 
-  describe '#size' do
+  describe "#size" do
     before do
       @image = Image.create(big_image: big_image)
     end

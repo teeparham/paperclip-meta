@@ -1,7 +1,6 @@
 module Paperclip
   module Meta
     module Attachment
-
       def assign_attributes
         super
         assign_meta

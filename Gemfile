@@ -6,4 +6,3 @@ end
 
 # See paperclip-meta.gemspec
 gemspec
-
