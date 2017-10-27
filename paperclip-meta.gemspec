@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency "paperclip", "~> 5.0"
 
   s.add_development_dependency "bundler", "~> 1.13"
-  s.add_development_dependency "rake", "~> 11.3"
+  s.add_development_dependency "rake", "~> 12.0"
   s.add_development_dependency "mocha", "~> 1.2"
   s.add_development_dependency "activerecord", "~> 5.0"
   s.add_development_dependency "sqlite3", ">= 1.3.10"
