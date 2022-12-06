@@ -13,9 +13,9 @@ Gem::Specification.new do |s|
   s.files         = Dir["LICENSE.txt", "README.md", "lib/**/*"]
   s.require_paths = ["lib"]
 
-  s.required_ruby_version = ">= 2.2.2"
+  s.required_ruby_version = ">= 2.7"
 
-  s.add_dependency "paperclip", ">= 5.0"
+  s.add_dependency "kt-paperclip", ">= 6.0"
 
   s.add_development_dependency "bundler", "~> 1.13"
   s.add_development_dependency "rake", "~> 12.0"
